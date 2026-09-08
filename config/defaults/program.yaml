@@ -1,0 +1,6 @@
+program:
+  feature_flags:
+    visual_debugger: false
+    program_versioning: true
+  storage:
+    max_programs: 200

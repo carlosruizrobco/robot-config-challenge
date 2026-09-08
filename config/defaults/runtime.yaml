@@ -1,0 +1,13 @@
+runtime:
+  modules: [base-l, joint-l, joint-m, joint-m, joint-s, wrist-s]
+  gripper: none
+  joint_limits_deg:
+    j1: 170
+    j2: 120
+    j3: 150
+    j4: 180
+    j5: 120
+    j6: 350
+  safety:
+    max_tcp_speed_mm_s: 1000
+    collaborative_mode: true

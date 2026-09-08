@@ -1,0 +1,5 @@
+program:
+  feature_flags:
+    visual_debugger: true
+agent:
+  platform_endpoint: https://fleet-dev.example.com

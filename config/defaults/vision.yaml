@@ -1,0 +1,6 @@
+vision:
+  model: pick-v6
+  camera:
+    exposure_ms: 8
+  inference:
+    confidence_threshold: 0.85

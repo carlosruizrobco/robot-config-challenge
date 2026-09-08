@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fleet.example.com/schema/config.schema.json",
+  "title": "Robot configuration",
+  "description": "Final configuration of one robot after merging defaults, environment, site and robot.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["runtime", "program", "vision", "agent"],
+  "properties": {
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["modules", "gripper", "joint_limits_deg", "calibration_ref", "safety"],
+      "properties": {
+        "modules": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "enum": ["base-l", "joint-l", "joint-m", "joint-s", "wrist-s", "wrist-s-cam"] }
+        },
+        "gripper": { "enum": ["vacuum-2", "parallel-s", "parallel-m", "none"] },
+        "joint_limits_deg": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["j1", "j2", "j3", "j4", "j5", "j6"],
+          "properties": {
+            "j1": { "$ref": "#/$defs/joint_limit" },
+            "j2": { "$ref": "#/$defs/joint_limit" },
+            "j3": { "$ref": "#/$defs/joint_limit" },
+            "j4": { "$ref": "#/$defs/joint_limit" },
+            "j5": { "$ref": "#/$defs/joint_limit" },
+            "j6": { "$ref": "#/$defs/joint_limit" }
+          }
+        },
+        "calibration_ref": {
+          "type": "string",
+          "pattern": "^cal/rb-[0-9]{4}/[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "safety": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["max_tcp_speed_mm_s", "collaborative_mode"],
+          "properties": {
+            "max_tcp_speed_mm_s": { "type": "number", "minimum": 0, "maximum": 1500 },
+            "collaborative_mode": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "program": {
+      "type": "object",
+      "required": ["feature_flags", "storage"],
+      "properties": {
+        "feature_flags": {
+          "type": "object",
+          "additionalProperties": { "type": "boolean" }
+        },
+        "storage": {
+          "type": "object",
+          "required": ["max_programs"],
+          "properties": {
+            "max_programs": { "type": "integer", "minimum": 1 }
+          }
+        }
+      }
+    },
+    "vision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "camera", "inference"],
+      "properties": {
+        "model": { "type": "string", "pattern": "^[a-z]+-v[0-9]+$" },
+        "camera": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["exposure_ms"],
+          "properties": {
+            "exposure_ms": { "type": "number", "minimum": 1, "maximum": 100 }
+          }
+        },
+        "inference": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["confidence_threshold"],
+          "properties": {
+            "confidence_threshold": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+    "agent": {
+      "type": "object",
+      "required": ["platform_endpoint", "telemetry"],
+      "properties": {
+        "platform_endpoint": { "type": "string", "format": "uri", "pattern": "^https?://" },
+        "telemetry": {
+          "type": "object",
+          "required": ["sample_interval_s"],
+          "properties": {
+            "sample_interval_s": { "type": "integer", "minimum": 1, "maximum": 3600 }
+          }
+        },
+        "plc": {
+          "type": "object",
+          "required": ["host"],
+          "properties": {
+            "host": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?$"
+            },
+            "token_ref": { "type": "string", "pattern": "^secret://" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "joint_limit": { "type": "number", "minimum": 0, "maximum": 360 }
+  }
+}

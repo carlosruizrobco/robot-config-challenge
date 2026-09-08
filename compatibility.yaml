@@ -1,0 +1,13 @@
+rules:
+  - id: vision-3.2-needs-runtime-5
+    when: { release: { vision: ">=3.2.0" } }
+    requires: { release: { runtime: ">=5.0.0" } }
+  - id: agent-1.10-needs-runtime-5
+    when: { release: { agent: ">=1.10.0" } }
+    requires: { release: { runtime: ">=5.0.0" } }
+  - id: program-2.14-needs-agent-1.10
+    when: { release: { program: ">=2.14.0" } }
+    requires: { release: { agent: ">=1.10.0" } }
+  - id: pick-v7-needs-runtime-5
+    when: { config: { vision.model: pick-v7 } }
+    requires: { release: { runtime: ">=5.0.0" } }

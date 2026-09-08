@@ -1,0 +1,3 @@
+agent:
+  telemetry:
+    sample_interval_s: 30

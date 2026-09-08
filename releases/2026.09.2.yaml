@@ -1,0 +1,6 @@
+release: 2026.09.2
+apps:
+  runtime: 4.8.0
+  program: 2.13.0
+  vision: 3.1.4
+  agent: 1.9.0
