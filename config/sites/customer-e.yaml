@@ -1,0 +1,14 @@
+environment: prod
+release: 2026.09.2
+maintenance_window:
+  days: [sat, sun]
+  start: "00:00"
+  end: "04:00"
+  timezone: Europe/Vienna
+vision:
+  camera:
+    exposure_ms: 12   # brighter hall lighting, tuned at commissioning
+agent:
+  plc:
+    host: 10.40.2.10
+    token_ref: secret://sites/customer-e/plc-token

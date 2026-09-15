@@ -1,0 +1,3 @@
+site: customer-d
+runtime:
+  calibration_ref: cal/rb-0160/2026-04-15

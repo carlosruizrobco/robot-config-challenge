@@ -1,0 +1,8 @@
+site: robco-lab
+runtime:
+  safety:
+    max_tcp_speed_mm_s: 1200
+  calibration_ref: cal/rb-0142/2026-10-06
+vision:
+  camera:
+    exposure_ms: 6

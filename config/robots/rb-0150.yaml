@@ -1,0 +1,6 @@
+site: customer-b
+runtime:
+  calibration_ref: cal/rb-0150/2025-11-19
+vision:
+  camera:
+    exposure_ms: 10

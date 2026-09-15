@@ -1,0 +1,5 @@
+site: customer-a
+runtime:
+  safety:
+    max_tcp_speed_mm_s: 800
+  calibration_ref: cal/rb-0146/2026-03-12

@@ -1,0 +1,17 @@
+environment: prod
+release: 2026.09.2
+maintenance_window:
+  days: [sat]
+  start: "22:00"
+  end: "02:00"
+  timezone: Europe/Amsterdam
+runtime:
+  safety:
+    collaborative_mode: false   # all cells are fenced, nobody works next to the robots
+vision:
+  camera:
+    exposure_ms: 15
+agent:
+  plc:
+    host: plc01.customer-c.example.com
+    token_ref: secret://sites/customer-c/plc-token

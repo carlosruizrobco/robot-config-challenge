@@ -1,0 +1,4 @@
+site: customer-c
+runtime:
+  gripper: vacuum-2
+  calibration_ref: cal/rb-0152/2026-01-20

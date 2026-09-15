@@ -1,0 +1,5 @@
+site: customer-c
+runtime:
+  gripper: vacuum-2
+  modules: [base-l, joint-l, joint-m, joint-m, joint-s, wrist-s-cam]
+  calibration_ref: cal/rb-0155/2026-01-21

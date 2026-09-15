@@ -1,0 +1,5 @@
+site: customer-a
+runtime:
+  joint_limits_deg:
+    j3: 90
+  calibration_ref: cal/rb-0145/2026-03-12

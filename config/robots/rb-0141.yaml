@@ -1,0 +1,4 @@
+site: robco-lab
+runtime:
+  modules: [base-l, joint-l, joint-m, joint-m, joint-s, wrist-s-cam]
+  calibration_ref: cal/rb-0141/2026-09-24

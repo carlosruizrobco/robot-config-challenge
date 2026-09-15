@@ -1,0 +1,4 @@
+site: customer-a
+runtime:
+  gripper: parallel-s
+  calibration_ref: cal/rb-0144/2026-03-11

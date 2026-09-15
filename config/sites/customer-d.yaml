@@ -1,0 +1,13 @@
+environment: prod
+release: 2026.09.2
+maintenance_window:
+  days: [sun]
+  start: "03:00"
+  end: "06:00"
+  timezone: America/Chicago
+runtime:
+  gripper: vacuum-2
+agent:
+  plc:
+    host: 10.30.1.5
+    token_ref: secret://sites/customer-d/plc-token

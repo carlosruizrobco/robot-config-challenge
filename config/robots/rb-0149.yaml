@@ -1,0 +1,4 @@
+site: customer-b
+runtime:
+  gripper: none
+  calibration_ref: cal/rb-0149/2025-11-18

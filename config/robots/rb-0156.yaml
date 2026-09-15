@@ -1,0 +1,6 @@
+site: customer-c
+runtime:
+  gripper: parallel-m
+  joint_limits_deg:
+    j1: 150
+  calibration_ref: cal/rb-0156/2026-05-07

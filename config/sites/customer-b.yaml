@@ -1,0 +1,16 @@
+environment: prod
+release: 2026.09.2
+maintenance_window:
+  days: [sun]
+  start: "01:00"
+  end: "04:00"
+  timezone: Europe/Berlin
+runtime:
+  gripper: parallel-m
+vision:
+  inference:
+    confidence_threshold: 0.9
+agent:
+  plc:
+    host: 10.12.0.20
+    token_ref: secret://sites/customer-b/plc-token

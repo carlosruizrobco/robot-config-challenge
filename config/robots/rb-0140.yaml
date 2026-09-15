@@ -1,0 +1,4 @@
+site: robco-lab
+runtime:
+  gripper: parallel-m
+  calibration_ref: cal/rb-0140/2026-10-02

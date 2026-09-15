@@ -1,0 +1,7 @@
+site: customer-d
+runtime:
+  gripper: parallel-s
+  calibration_ref: cal/rb-0159/2026-04-15
+program:
+  storage:
+    max_programs: 500
