@@ -1,4 +1,6 @@
 environment: dev
-release: 2026.09.2
+release: 2026.10.1
 runtime:
   gripper: parallel-s
+vision:
+  model: pick-v7   # trying the new model in the lab before it goes to customers

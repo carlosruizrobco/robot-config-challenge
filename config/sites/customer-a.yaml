@@ -1,5 +1,5 @@
 environment: prod
-release: 2026.09.2
+release: 2026.10.1
 maintenance_window:
   days: [sat, sun]
   start: "02:00"
