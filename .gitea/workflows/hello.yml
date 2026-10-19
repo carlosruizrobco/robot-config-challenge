@@ -1,0 +1,21 @@
+name: hello
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Show tool versions
+        run: |
+          python3 --version
+          go version
+
+      - name: List the configuration
+        run: find config -type f | sort

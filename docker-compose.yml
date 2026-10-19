@@ -1,0 +1,71 @@
+name: robot-config-challenge
+
+services:
+  gitea:
+    image: gitea/gitea:28.1.0
+    environment:
+      USER_UID: "1000"
+      USER_GID: "1000"
+      GITEA__database__DB_TYPE: sqlite3
+      GITEA__security__INSTALL_LOCK: "true"
+      GITEA__server__ROOT_URL: http://localhost:3000/
+      GITEA__server__HTTP_PORT: "3000"
+      GITEA__server__DISABLE_SSH: "true"
+      GITEA__server__START_SSH_SERVER: "false"
+      GITEA__service__DISABLE_REGISTRATION: "true"
+      GITEA__actions__ENABLED: "true"
+      GITEA__actions__DEFAULT_ACTIONS_URL: github
+      GITEA__repository__DEFAULT_REPO_UNITS: repo.code,repo.issues,repo.pulls,repo.releases,repo.wiki,repo.projects,repo.packages,repo.actions
+    volumes:
+      - gitea-data:/data
+    ports:
+      - "127.0.0.1:3000:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3000/api/healthz"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+      start_period: 5s
+
+  runner:
+    image: gitea/act_runner:0.6.1
+    depends_on:
+      gitea:
+        condition: service_healthy
+    environment:
+      CONFIG_FILE: /config.yaml
+      GITEA_INSTANCE_URL: http://gitea:3000
+      GITEA_RUNNER_REGISTRATION_TOKEN: ${RUNNER_REGISTRATION_TOKEN:-}
+      GITEA_RUNNER_NAME: local-runner
+    configs:
+      - source: runner-config
+        target: /config.yaml
+    volumes:
+      - runner-data:/data
+      - ${DOCKER_SOCKET:-/var/run/docker.sock}:/var/run/docker.sock
+
+configs:
+  runner-config:
+    content: |
+      log:
+        level: info
+      runner:
+        file: /data/.runner
+        capacity: 2
+        labels:
+          - "ubuntu-latest:docker://robot-config-job:1.0.0"
+      container:
+        # Jobs join this Compose network, so they reach Gitea at the same
+        # URL the runner uses (http://gitea:3000), which is the server URL
+        # that actions/checkout and the github.* context see in jobs.
+        network: robot-config-challenge
+        force_pull: false
+        force_rebuild: false
+
+networks:
+  default:
+    name: robot-config-challenge
+
+volumes:
+  gitea-data:
+  runner-data:
