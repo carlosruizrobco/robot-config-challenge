@@ -7,7 +7,7 @@ maintenance_window:
   timezone: Europe/Vienna
 vision:
   camera:
-    exposure_ms: 12   # brighter hall lighting, tuned at commissioning
+    exposure_ms: 10   # brighter hall lighting, tuned at commissioning
 agent:
   plc:
     host: 10.40.2.10
